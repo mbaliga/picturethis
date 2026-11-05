@@ -20,6 +20,7 @@ public class MainActivity extends Activity {
   web.getSettings().setAllowFileAccess(false); web.getSettings().setAllowContentAccess(true);
   web.setWebViewClient(new WebViewClient(){
    @Override public WebResourceResponse shouldInterceptRequest(WebView v, WebResourceRequest r){
+    if("content".equals(r.getUrl().getScheme()) || "data".equals(r.getUrl().getScheme())) return null;
     if(r.getUrl().toString().equals("https://picturethis.local/")) try {return new WebResourceResponse("text/html","UTF-8",getAssets().open("index.html"));}catch(IOException e){return null;}
     return new WebResourceResponse("text/plain","UTF-8",new ByteArrayInputStream(new byte[0]));
    }
