@@ -15,6 +15,7 @@ public class MainActivity extends Activity {
  WebView web; ValueCallback<Uri[]> chooser; byte[] pendingExport;
  @Override public void onCreate(Bundle b) {
   super.onCreate(b); web=new WebView(this); setContentView(web);
+  web.setOnApplyWindowInsetsListener((v,insets)->{v.setPadding(insets.getSystemWindowInsetLeft(),insets.getSystemWindowInsetTop(),insets.getSystemWindowInsetRight(),insets.getSystemWindowInsetBottom());return insets.consumeSystemWindowInsets();});
   web.getSettings().setJavaScriptEnabled(true); web.getSettings().setDomStorageEnabled(true);
   web.getSettings().setAllowFileAccess(false); web.getSettings().setAllowContentAccess(true);
   web.setWebViewClient(new WebViewClient(){
